@@ -35,7 +35,6 @@ bin/*
 "Quizzes and Exams"/
 /Quizzes and Exams/
 
-src/main/java/edu/neu/coe/info6205/sort/simple/MergeSortDecisionTree\.java
 src/main/resources/sample\.kml
 
 tunnels\.kml
@@ -48,7 +47,6 @@ NEU Tunnel System latest\.kml
 
 src/main/java/edu/neu/coe/info6205/sort/simple/InsertionSortForMidTerm.java
 
-src/main/java/edu/neu/coe/info6205/sort/simple/MergeSortBasic.java
 
 src/main/java/edu/neu/coe/info6205/sort/simple/Solution.java
 
@@ -57,6 +55,5 @@ src/main/java/edu/neu/coe/info6205/Ticket.java
 src/main/java/edu/neu/coe/info6205/TicketChecker.java
 /src/main/java/edu/neu/coe/info6205/codelength/CodeLength.java
 /src/main/java/edu/neu/coe/info6205/union_find/HWQUPC_Solution.java
-/src/test/java/edu/neu/coe/info6205/sort/simple/MergeSortTest.java
 /src/main/java/edu/neu/coe/info6205/codelength/Solution.java
 /src/test/java/edu/neu/coe/info6205/TicketTest.java
