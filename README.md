@@ -1,2 +1,4 @@
 # INFO6205
 For Assignment in NEU INFO6205
+Yue Fang
+NUID 001584481
