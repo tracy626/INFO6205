@@ -14,6 +14,15 @@ public class InsertionSortBasic {
 
     private void swap(int i, Object[] a) {
         // TO BE IMPLEMENTED
+        for (int k = 0; i < a.length; k++) {
+            for (int j = k - 1; j >= 0; j--) {
+                if (((Comparable)a[j]).compareTo(a[j + 1]) > 0) {
+                    swap(a, j, j + 1);
+                } else {
+                    break;
+                }
+            }
+        }
     }
 
     private void swap(Object[] a, int j, int i) {

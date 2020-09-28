@@ -67,8 +67,9 @@ public class Timer {
             } else {
                 function.apply(supplier.get());
             }
-
+            lap();
         }
+        pause();
         return meanLapTime();
     }
 
