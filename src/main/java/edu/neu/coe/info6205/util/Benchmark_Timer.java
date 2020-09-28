@@ -4,6 +4,7 @@
 
 package edu.neu.coe.info6205.util;
 
+import java.util.Arrays;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -122,32 +123,46 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
 
     public static void main(String[] args) {
         GenerateIntegers generator = new GenerateIntegers();
-        int num = Integer.parseInt(args[0]);
+
+        int num = 500;
+        int runtime = 5;
+        int doubleTime = 5;
+        if (args.length > 0) num = Integer.parseInt(args[0]);
         
         // random, ordered, partially-ordered and reverse-ordered
         Integer[] random = generator.generateRandomArray(GenerateIntegers.Ordering.RANDOM, num);
         Integer[] ordered = generator.generateRandomArray(GenerateIntegers.Ordering.ORDERED, num);
         Integer[] partOrdered = generator.generateRandomArray(GenerateIntegers.Ordering.PARTORDERED, num);
         Integer[] reverse = generator.generateRandomArray(GenerateIntegers.Ordering.REVERSE, num);
-        int runtime = 5; // number of times the sort function will be called
+//        System.out.println("random array" + Arrays.toString(random));
+//        System.out.println("ordered array" + Arrays.toString(ordered));
+//        System.out.println("part ordered array" + Arrays.toString(partOrdered));
+//        System.out.println("reverse array" + Arrays.toString(reverse));
+
+        if (args.length > 1) runtime = Integer.parseInt(args[1]); // number of times the sort function will be called
+        if (args.length > 2) doubleTime = Integer.parseInt(args[2]); // doubling times of running
 
         InsertionSort sorter = new InsertionSort();
         Consumer<Integer[]> consumer =  array -> sorter.sort(array, 0, array.length);
         Benchmark_Timer benchmark = new Benchmark_Timer(InsertionSort.DESCRIPTION, consumer);
 
-        double timeRandom = benchmark.run(random, runtime);
-        double timeOrdered = benchmark.run(ordered, runtime);
-        double timePartOrdered = benchmark.run(partOrdered, runtime);
-        double timeReverse = benchmark.run(reverse, runtime);
+        for (int i = 0; i < doubleTime; i++) {
+            int doublingTime = runtime * (int)Math.pow(2, i);
+            double timeRandom = benchmark.run(random, doublingTime);
+            double timeOrdered = benchmark.run(ordered, doublingTime);
+            double timePartOrdered = benchmark.run(partOrdered, doublingTime);
+            double timeReverse = benchmark.run(reverse, doublingTime);
 
-        System.out.println(("Average time of " + runtime + " times of insertion sort (random) array of "
-                + num + " numbers in " + timeRandom + " ms"));
-        System.out.println(("Average time of " + runtime + " times of insertion sort (ordered) array of " +
-                num + " numbers in " + timeOrdered + " ms"));
-        System.out.println(("Average time of " + runtime + " times of insertion sort (partially-ordered) array of " +
-                num + " numbers in " + timePartOrdered + " ms"));
-        System.out.println(("Average time of " + runtime + " times of insertion sort (reverse) array of " +
-                num + " numbers in " + timeReverse + " ms"));
+            System.out.println(("Average time of " + doublingTime + " times of insertion sort (random) array of "
+                    + num + " numbers in " + timeRandom + " ms"));
+            System.out.println(("Average time of " + doublingTime + " times of insertion sort (ordered) array of " +
+                    num + " numbers in " + timeOrdered + " ms"));
+            System.out.println(("Average time of " + doublingTime + " times of insertion sort (partially-ordered) array of " +
+                    num + " numbers in " + timePartOrdered + " ms"));
+            System.out.println(("Average time of " + doublingTime + " times of insertion sort (reverse) array of " +
+                    num + " numbers in " + timeReverse + " ms"));
+            System.out.println();
+        }
     }
 
     private final String description;
