@@ -9,6 +9,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
+import edu.neu.coe.info6205.sort.simple.InsertionSort;
 import static edu.neu.coe.info6205.util.Utilities.formatWhole;
 
 /**
@@ -117,6 +118,36 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
      */
     public Benchmark_Timer(String description, Consumer<T> f) {
         this(description, null, f, null);
+    }
+
+    public static void main(String[] args) {
+        GenerateIntegers generator = new GenerateIntegers();
+        int num = Integer.parseInt(args[0]);
+        
+        // random, ordered, partially-ordered and reverse-ordered
+        Integer[] random = generator.generateRandomArray(GenerateIntegers.Ordering.RANDOM, num);
+        Integer[] ordered = generator.generateRandomArray(GenerateIntegers.Ordering.ORDERED, num);
+        Integer[] partOrdered = generator.generateRandomArray(GenerateIntegers.Ordering.PARTORDERED, num);
+        Integer[] reverse = generator.generateRandomArray(GenerateIntegers.Ordering.REVERSE, num);
+        int runtime = 5; // number of times the sort function will be called
+
+        InsertionSort sorter = new InsertionSort();
+        Consumer<Integer[]> consumer =  array -> sorter.sort(array, 0, array.length);
+        Benchmark_Timer benchmark = new Benchmark_Timer(InsertionSort.DESCRIPTION, consumer);
+
+        double timeRandom = benchmark.run(random, runtime);
+        double timeOrdered = benchmark.run(ordered, runtime);
+        double timePartOrdered = benchmark.run(partOrdered, runtime);
+        double timeReverse = benchmark.run(reverse, runtime);
+
+        System.out.println(("Average time of " + runtime + " times of insertion sort (random) array of "
+                + num + " numbers in " + timeRandom + " ms"));
+        System.out.println(("Average time of " + runtime + " times of insertion sort (ordered) array of " +
+                num + " numbers in " + timeOrdered + " ms"));
+        System.out.println(("Average time of " + runtime + " times of insertion sort (partially-ordered) array of " +
+                num + " numbers in " + timePartOrdered + " ms"));
+        System.out.println(("Average time of " + runtime + " times of insertion sort (reverse) array of " +
+                num + " numbers in " + timeReverse + " ms"));
     }
 
     private final String description;
