@@ -8,6 +8,7 @@
 package edu.neu.coe.info6205.union_find;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Height-weighted Quick Union with Path Compression
@@ -82,6 +83,14 @@ public class UF_HWQUPC implements UF {
         validate(p);
         int root = p;
         // TO BE IMPLEMENTED
+        while (root != parent[root]) {
+//            parent[root] = getParent(getParent(root));
+            if (this.pathCompression) {
+                doPathCompression(root);
+            }
+            root = parent[root];
+        }
+
         return root;
     }
 
@@ -169,6 +178,15 @@ public class UF_HWQUPC implements UF {
 
     private void mergeComponents(int i, int j) {
         // TO BE IMPLEMENTED make shorter root point to taller one
+        if (i == j) return;
+
+        if (height[i] < height[j]) {
+            updateParent(i, j);
+            updateHeight(j, i);
+        } else {
+            updateParent(j, i);
+            updateHeight(i, j);
+        }
     }
 
     /**
@@ -176,5 +194,44 @@ public class UF_HWQUPC implements UF {
      */
     private void doPathCompression(int i) {
         // TO BE IMPLEMENTED update parent to value of grandparent
+//        parent[i] = parent[parent[i]];
+        updateParent(i, parent[parent[i]]);
+    }
+
+    public boolean allConnected() {
+        for (int i = 0; i < size(); i++) {
+            if (height[find(i)] == 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static int count(int n) {
+        int countCon = 0;       // number of connections
+        UF_HWQUPC h = new UF_HWQUPC(n);
+//        UF_HWQUPC temp = (UF_HWQUPC)h;
+
+        while (!h.allConnected()) {
+//            System.out.println(countCon);
+            Random random = new Random();
+            int p = random.nextInt(n);
+            int q = random.nextInt(n);
+//            System.out.println("connect (" + p + ", " + q + ")");
+            h.connect(p, q);
+            countCon++;
+        }
+
+        return countCon;
+    }
+
+    public static void main(String[] args) {
+        if (args.length == 0)
+            throw new RuntimeException("Need input number of sites to create the UF_HWQUPC");
+        int n = Integer.parseInt(args[0]);
+//        System.out.println(n);
+        int connections = count(n);
+        System.out.println(n + " sites init and generate " + connections + " connections");
     }
 }
