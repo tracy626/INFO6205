@@ -223,6 +223,8 @@ public class UF_HWQUPC implements UF {
             countCon++;
         }
 
+//        System.out.println(h);
+//        h.show();
         return countCon;
     }
 
@@ -232,6 +234,6 @@ public class UF_HWQUPC implements UF {
         int n = Integer.parseInt(args[0]);
 //        System.out.println(n);
         int connections = count(n);
-        System.out.println(n + " sites init and generate " + connections + " connections");
+        System.out.println("Initiate with " + n + " sites and generate " + connections + " connections");
     }
 }
