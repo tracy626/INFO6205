@@ -3,6 +3,8 @@
  */
 package edu.neu.coe.info6205.union_find;
 
+import java.util.Random;
+
 /**
  * Weighted Quick Union with Path Compression
  */
@@ -110,5 +112,4 @@ public class WQUPC {
         }
         count--;
     }
-
 }
