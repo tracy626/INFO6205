@@ -54,13 +54,6 @@ public class WQU {
         validate(p);
         int root = p;
         while (root != parent[root]) {
-            int oldp = parent[root];
-            parent[root] = parent[parent[root]];
-            if (oldp != parent[root]){
-                depth[root]--;
-                updateDepth(root, -1);
-                size[oldp] -= size[root];
-            }
             root = parent[root];
         }
         return root;
@@ -106,20 +99,20 @@ public class WQU {
             parent[rootP] = rootQ;
             size[rootQ] += size[rootP];
             depth[rootP] = depth[rootQ] + 1;
-            updateDepth(rootP, 1);
+            updateDepth(rootP);
         } else {
             parent[rootQ] = rootP;
             size[rootP] += size[rootQ];
             depth[rootQ] = depth[rootP] + 1;
-            updateDepth(rootQ, 1);
+            updateDepth(rootQ);
         }
         count--;
     }
 
-    public void updateDepth(int p, int toUpdate) {
+    public void updateDepth(int p) {
         for (int i = 0; i < parent.length; i++) {
             if (parent[i] == p && i != p) {
-                depth[i] += toUpdate;
+                depth[i]++;
             }
         }
     }
