@@ -3,6 +3,7 @@
  */
 package edu.neu.coe.info6205.union_find;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -67,6 +68,13 @@ public class WQUPC2 {
         return root;
     }
 
+    @Override
+    public String toString() {
+        return "WQUPC:" + "\n  count: " + count +
+                "\n  parents: " + Arrays.toString(parent) +
+                "\n  sizes: " + Arrays.toString(size);
+    }
+
     // validate that p is a valid index
     private void validate(int p) {
         int n = parent.length;
@@ -114,20 +122,24 @@ public class WQUPC2 {
     }
 
     public static void main(String[] args) {
+        int countCon = 0;
         if (args.length == 0)
             throw new RuntimeException("Need input number of sites to create the HWQUPC");
         int n = Integer.parseInt(args[0]);
-        System.out.println(n);
+        System.out.println("Number of sites n = " + n);
         WQUPC2 h = new WQUPC2(n);
-        for (int i = 0; i < n; i++) {
+        while (h.count > 1) {
             Random random = new Random();
             int p = random.nextInt(n);
             int q = random.nextInt(n);
 
             System.out.println("union (" + p + ", " + q + ")");
             h.union(p, q);
+            countCon++;
         }
 
+        System.out.println(h);
         h.show();
+        System.out.println("Initiate with " + n + " sites and generate " + countCon + " connections");
     }
 }

@@ -1,10 +1,10 @@
 package edu.neu.coe.info6205.union_find;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class WQU {
     private final int[] parent;   // parent[i] = parent of i
-    private final int[] size;   // size[i] = size of subtree rooted at i
     private final int[] depth;  // depth[i[ = depth of subtree rooted at i
     private int count;  // number of components
 
@@ -19,18 +19,16 @@ public class WQU {
     public WQU(int n) {
         count = n;
         parent = new int[n];
-        size = new int[n];
         depth = new int[n];
         for (int i = 0; i < n; i++) {
             parent[i] = i;
-            size[i] = 1;
             depth[i] = 0;
         }
     }
 
     public void show() {
         for (int i = 0; i < parent.length; i++) {
-            System.out.printf("%d: %d, %d, %d\n", i, parent[i], size[i], depth[i]);
+            System.out.printf("%d: %d, %d\n", i, parent[i], depth[i]);
         }
     }
 
@@ -57,6 +55,13 @@ public class WQU {
             root = parent[root];
         }
         return root;
+    }
+
+    @Override
+    public String toString() {
+        return "WQU:" + "\n  count: " + count +
+                "\n  parents: " + Arrays.toString(parent) +
+                "\n  depths: " + Arrays.toString(depth);
     }
 
     // validate that p is a valid index
@@ -94,44 +99,70 @@ public class WQU {
         int rootP = find(p);
         int rootQ = find(q);
         if (rootP == rootQ) return;
-        // make smaller root point to larger one
-        if (size[rootP] < size[rootQ]) {
+        // make the root with the deepest leaf be the new root of other
+        if (deepestLeaf(p) < deepestLeaf(q)) {
             parent[rootP] = rootQ;
-            size[rootQ] += size[rootP];
-            depth[rootP] = depth[rootQ] + 1;
+            depth[rootP] = 1;
             updateDepth(rootP);
         } else {
             parent[rootQ] = rootP;
-            size[rootP] += size[rootQ];
             depth[rootQ] = depth[rootP] + 1;
             updateDepth(rootQ);
         }
         count--;
     }
 
+    /**
+     * Update the depth of all nodes/leaves of this site
+     * @param p the integer representing one site
+     */
     public void updateDepth(int p) {
         for (int i = 0; i < parent.length; i++) {
             if (parent[i] == p && i != p) {
                 depth[i]++;
+                updateDepth(i);
             }
         }
     }
 
+    /**
+     * Calculate the depth of this node/subtree
+     * @param p the integer representing one site
+     * @return the depth of the deepest leaf of this root
+     */
+    public int deepestLeaf(int p) {
+        int root = p;
+        int result = 0;
+        for (int i = 0; i < depth.length; i++) {
+            if (find(i) == find(root) && i != root) {
+                if (depth[i] > result) {
+                    result = depth[i];
+                }
+            }
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
+        int countCon = 0;
         if (args.length == 0)
             throw new RuntimeException("Need input number of sites to create the HWQUPC");
         int n = Integer.parseInt(args[0]);
-        System.out.println(n);
+        System.out.println("Number of sites n = " + n);
         WQU h = new WQU(n);
-        for (int i = 0; i < n; i++) {
+        while (h.count > 1) {
             Random random = new Random();
             int p = random.nextInt(n);
             int q = random.nextInt(n);
 
             System.out.println("union (" + p + ", " + q + ")");
             h.union(p, q);
+            countCon++;
         }
 
+        System.out.println(h);
         h.show();
+        System.out.println("Initiate with " + n + " sites and generate " + countCon + " connections");
     }
 }
