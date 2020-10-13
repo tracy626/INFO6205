@@ -1,0 +1,33 @@
+2020-10-13 08:05:55 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 5 runs
+Average time of connect 20000 sites by Weighted Quick Union is 12.2 ms
+2020-10-13 08:05:55 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 5 runs
+Average time of connect 40000 sites by Weighted Quick Union is 17.6 ms
+2020-10-13 08:05:55 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 5 runs
+Average time of connect 80000 sites by Weighted Quick Union is 38.6 ms
+2020-10-13 08:05:55 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 5 runs
+Average time of connect 160000 sites by Weighted Quick Union is 95.6 ms
+2020-10-13 08:05:56 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 5 runs
+Average time of connect 320000 sites by Weighted Quick Union is 172.4 ms
+
+2020-10-13 08:22:19 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 10 runs
+Average time of connect 10000 sites by Weighted Quick Union is 5.5 ms
+2020-10-13 08:22:20 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 10 runs
+Average time of connect 20000 sites by Weighted Quick Union is 9.2 ms
+2020-10-13 08:22:20 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 10 runs
+Average time of connect 40000 sites by Weighted Quick Union is 17.3 ms
+2020-10-13 08:22:20 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 10 runs
+Average time of connect 80000 sites by Weighted Quick Union is 46.4 ms
+2020-10-13 08:22:20 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 10 runs
+Average time of connect 160000 sites by Weighted Quick Union is 78.2 ms
+2020-10-13 08:22:21 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 10 runs
+Average time of connect 320000 sites by Weighted Quick Union is 193.2 ms
+2020-10-13 08:22:24 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 10 runs
+Average time of connect 640000 sites by Weighted Quick Union is 394.5 ms
+2020-10-13 08:22:28 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 10 runs
+Average time of connect 1280000 sites by Weighted Quick Union is 1003.8 ms
+2020-10-13 08:22:40 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 10 runs
+Average time of connect 2560000 sites by Weighted Quick Union is 2882.2 ms
+2020-10-13 08:23:15 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 10 runs
+Average time of connect 5120000 sites by Weighted Quick Union is 8258.1 ms
+2020-10-13 08:24:54 INFO  Benchmark_Timer - Begin run: Weighted Quick Union with Pass Compression (one-path variant) with 10 runs
+Average time of connect 10240000 sites by Weighted Quick Union is 19882.1 ms

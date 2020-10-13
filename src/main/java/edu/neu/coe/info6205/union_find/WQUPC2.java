@@ -10,6 +10,8 @@ import java.util.Random;
  * Weighted Quick Union with Path Compression
  */
 public class WQUPC2 {
+
+    public static final String DESCRIPTION = "Weighted Quick Union with Pass Compression (one-path variant)";
     private final int[] parent;   // parent[i] = parent of i
     private final int[] size;   // size[i] = size of subtree rooted at i
     private int count;  // number of components
@@ -119,6 +121,35 @@ public class WQUPC2 {
             size[rootP] += size[rootQ];
         }
         count--;
+    }
+
+    public static WQUPC2 reinitialize(WQUPC2 h) {
+        if (h.count == h.parent.length) {
+            return h;
+        }
+        h.count = h.parent.length;
+        for (int i = 0; i < h.parent.length; i++) {
+            h.parent[i] = i;
+            h.size[i] = 1;
+        }
+        return h;
+    }
+
+    public static void count(WQUPC2 h) {
+        int countCon = 0;
+        while (h.count > 1) {
+            Random random = new Random();
+            int p = random.nextInt(h.parent.length);
+            int q = random.nextInt(h.parent.length);
+
+//            System.out.println("union (" + p + ", " + q + ")");
+            h.union(p, q);
+            countCon++;
+        }
+
+//        System.out.println(h);
+//        h.show();
+//        System.out.println("Initiate with " + h.parent.length + " sites and generate " + countCon + " connections");
     }
 
     public static void main(String[] args) {

@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class WQU {
+
+    public static final String DESCRIPTION = "Weighted Quick Union (Store Size)";
     private final int[] parent;   // parent[i] = parent of i
-    private final int[] depth;  // depth[i[ = depth of subtree rooted at i
+    private final int[] depth;  // depth[i] = depth of subtree rooted at i
     private int count;  // number of components
 
     /**
@@ -100,14 +102,20 @@ public class WQU {
         int rootQ = find(q);
         if (rootP == rootQ) return;
         // make the root with the deepest leaf be the new root of other
-        if (deepestLeaf(p) < deepestLeaf(q)) {
+//        if (deepestLeaf(p) < deepestLeaf(q)) {
+        if (depth[rootP] < depth[rootQ]) {
             parent[rootP] = rootQ;
-            depth[rootP] = 1;
-            updateDepth(rootP);
+//            size[rootQ] += size[rootP];
+//            depth[rootQ]+= (depth[rootQ] - depth[rootP]) + 1;
+//            if (size[rootP] > 1) updateDepth(rootP);
         } else {
             parent[rootQ] = rootP;
-            depth[rootQ] = depth[rootP] + 1;
-            updateDepth(rootQ);
+//            size[rootP] += size[rootQ];
+            if (depth[rootP] == depth[rootQ]) {
+                depth[rootP]++;
+            }
+//            depth[rootQ] = depth[rootP] + 1;
+//            if (size[rootQ] > 1) updateDepth(rootQ);
         }
         count--;
     }
@@ -120,7 +128,7 @@ public class WQU {
         for (int i = 0; i < parent.length; i++) {
             if (parent[i] == p && i != p) {
                 depth[i]++;
-                updateDepth(i);
+//                if (size[i] > 1)  updateDepth(i);
             }
         }
     }
@@ -144,6 +152,35 @@ public class WQU {
         return result;
     }
 
+    public static WQU reinitialize(WQU h) {
+        if (h.count == h.parent.length) {
+            return h;
+        }
+        h.count = h.parent.length;
+        for (int i = 0; i < h.parent.length; i++) {
+            h.parent[i] = i;
+            h.depth[i] = 0;
+        }
+        return h;
+    }
+
+    public static void count(WQU h) {
+        int countCon = 0;
+        while (h.count > 1) {
+            Random random = new Random();
+            int p = random.nextInt(h.parent.length);
+            int q = random.nextInt(h.parent.length);
+
+//            System.out.println("union (" + p + ", " + q + ")");
+            h.union(p, q);
+            countCon++;
+        }
+
+//        System.out.println(h);
+//        h.show();
+//        System.out.println("Initiate with " + h.parent.length + " sites and generate " + countCon + " connections");
+    }
+
     public static void main(String[] args) {
         int countCon = 0;
         if (args.length == 0)
@@ -165,4 +202,5 @@ public class WQU {
         h.show();
         System.out.println("Initiate with " + n + " sites and generate " + countCon + " connections");
     }
+
 }

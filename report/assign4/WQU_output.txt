@@ -1,0 +1,45 @@
+2020-10-12 19:34:01 INFO  Benchmark_Timer - Begin run: Weighted Quick Union (Store Size) with 5 runs
+Initiate with 20000 sites and generate 106549 connections
+Initiate with 20000 sites and generate 93908 connections
+Initiate with 20000 sites and generate 100832 connections
+Initiate with 20000 sites and generate 90295 connections
+Initiate with 20000 sites and generate 159009 connections
+Initiate with 20000 sites and generate 101336 connections
+Initiate with 20000 sites and generate 106595 connections
+Average time of connect 20000 sites by Weighted Quick Union is 12.0 ms
+2020-10-12 19:34:01 INFO  Benchmark_Timer - Begin run: Weighted Quick Union (Store Size) with 5 runs
+Initiate with 40000 sites and generate 195529 connections
+Initiate with 40000 sites and generate 221030 connections
+Initiate with 40000 sites and generate 274738 connections
+Initiate with 40000 sites and generate 197504 connections
+Initiate with 40000 sites and generate 219413 connections
+Initiate with 40000 sites and generate 259206 connections
+Initiate with 40000 sites and generate 209278 connections
+Average time of connect 40000 sites by Weighted Quick Union is 21.4 ms
+2020-10-12 19:34:01 INFO  Benchmark_Timer - Begin run: Weighted Quick Union (Store Size) with 5 runs
+Initiate with 80000 sites and generate 415408 connections
+Initiate with 80000 sites and generate 540360 connections
+Initiate with 80000 sites and generate 463712 connections
+Initiate with 80000 sites and generate 442722 connections
+Initiate with 80000 sites and generate 473161 connections
+Initiate with 80000 sites and generate 446207 connections
+Initiate with 80000 sites and generate 488080 connections
+Average time of connect 80000 sites by Weighted Quick Union is 47.4 ms
+2020-10-12 19:34:02 INFO  Benchmark_Timer - Begin run: Weighted Quick Union (Store Size) with 5 runs
+Initiate with 160000 sites and generate 1015356 connections
+Initiate with 160000 sites and generate 905155 connections
+Initiate with 160000 sites and generate 962798 connections
+Initiate with 160000 sites and generate 1143557 connections
+Initiate with 160000 sites and generate 882097 connections
+Initiate with 160000 sites and generate 1008165 connections
+Initiate with 160000 sites and generate 1118680 connections
+Average time of connect 160000 sites by Weighted Quick Union is 99.4 ms
+2020-10-12 19:34:03 INFO  Benchmark_Timer - Begin run: Weighted Quick Union (Store Size) with 5 runs
+Initiate with 320000 sites and generate 2575104 connections
+Initiate with 320000 sites and generate 2099538 connections
+Initiate with 320000 sites and generate 1953204 connections
+Initiate with 320000 sites and generate 1938599 connections
+Initiate with 320000 sites and generate 2037463 connections
+Initiate with 320000 sites and generate 1901024 connections
+Initiate with 320000 sites and generate 2020562 connections
+Average time of connect 320000 sites by Weighted Quick Union is 194.6 ms
