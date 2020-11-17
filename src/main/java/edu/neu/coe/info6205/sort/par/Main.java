@@ -22,8 +22,9 @@ public class Main {
         Random random = new Random();
         int[] array = new int[2000000];
         ArrayList<Long> timeList = new ArrayList<>();
-        for (int j = 50; j < 100; j++) {
-            ParSort.cutoff = 10000 * (j + 1);
+        for (int j = 0; j < 100; j++) {
+            ParSort.cutoff = 20000 * (j + 1);
+//            ParSort.cutoff = 10000;
             // for (int i = 0; i < array.length; i++) array[i] = random.nextInt(10000000);
             long time;
             long startTime = System.currentTimeMillis();
@@ -35,7 +36,6 @@ public class Main {
             time = (endTime - startTime);
             timeList.add(time);
 
-
             System.out.println("cutoff：" + (ParSort.cutoff) + "\t\t10times Time:" + time + "ms");
 
         }
@@ -45,7 +45,7 @@ public class Main {
             BufferedWriter bw = new BufferedWriter(isr);
             int j = 0;
             for (long i : timeList) {
-                String content = (double) 10000 * (j + 1) / 2000000 + "," + (double) i / 10 + "\n";
+                String content = (double) 20000 * (j + 1) / 2000000 + "," + (double) i / 10 + "\n";
                 j++;
                 bw.write(content);
                 bw.flush();

@@ -1,5 +1,7 @@
 package edu.neu.coe.info6205.sort.par;
 
+import edu.neu.coe.info6205.sort.Helper;
+import java.util.concurrent.ForkJoinPool;
 import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 
@@ -18,13 +20,38 @@ class ParSort {
             CompletableFuture<int[]> parsort2 = parsort(array, from + (to - from) / 2, to); // TO IMPLEMENT
             CompletableFuture<int[]> parsort = parsort1.thenCombine(parsort2, (xs1, xs2) -> {
                 int[] result = new int[xs1.length + xs2.length];
-                // TO IMPLEMENT
+                // TO IMPLEMENT: merge xs1 and xs2
+                int i = 0;
+                int j = 0;
+                int k = 0;
+
+                for (;k < result.length; k++) {
+                    if (i >= xs1.length) {
+                        result[k] = xs2[j++];
+                    } else if (j >= xs2.length) {
+                        result[k] = xs1[i++];
+                    } else if (xs2[j] < xs1[i]) {
+                        result[k] = xs2[j++];
+                    } else {
+                        result[k] = xs1[i++];
+                    }
+                }
+
+//                System.out.println("merge " + Thread.currentThread().getName());
+//                for (int a : result) {
+//                    System.out.print(a + ",");
+//                }
+//                System.out.println();
                 return result;
             });
 
-            parsort.whenComplete((result, throwable) -> System.arraycopy(result, 0, array, from, result.length));
-//            System.out.println("# threads: "+ ForkJoinPool.commonPool().getRunningThreadCount());
+            parsort.whenComplete((result, throwable) -> {
+                System.arraycopy(result, 0, array, from, result.length);
+//                System.out.println("when complete " + Thread.currentThread().getName());
+            });
+//            System.out.println("# threads:"  + ForkJoinPool.commonPool().getRunningThreadCount());
             parsort.join();
+
         }
     }
 
@@ -32,7 +59,8 @@ class ParSort {
         return CompletableFuture.supplyAsync(
                 () -> {
                     int[] result = new int[to - from];
-                    // TO IMPLEMENT
+//                    System.out.println("supplyAsync " + Thread.currentThread().getName());
+
                     System.arraycopy(array, from, result, 0, result.length);
                     sort(result, 0, to - from);
                     return result;
