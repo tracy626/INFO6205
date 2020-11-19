@@ -1,6 +1,8 @@
 package edu.neu.coe.info6205.sort.par;
 
 import edu.neu.coe.info6205.sort.Helper;
+
+import java.util.concurrent.Executor;
 import java.util.concurrent.ForkJoinPool;
 import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
@@ -12,6 +14,7 @@ import java.util.concurrent.CompletableFuture;
 class ParSort {
 
     public static int cutoff = 1000;
+    public static ForkJoinPool pool = null;
 
     public static void sort(int[] array, int from, int to) {
         if (to - from < cutoff) Arrays.sort(array, from, to);
@@ -56,6 +59,19 @@ class ParSort {
     }
 
     private static CompletableFuture<int[]> parsort(int[] array, int from, int to) {
+        if (pool == null) {
+            return CompletableFuture.supplyAsync(
+                    () -> {
+                        int[] result = new int[to - from];
+//                    System.out.println("supplyAsync " + Thread.currentThread().getName());
+
+                        System.arraycopy(array, from, result, 0, result.length);
+                        sort(result, 0, to - from);
+                        return result;
+                    }
+            );
+        }
+
         return CompletableFuture.supplyAsync(
                 () -> {
                     int[] result = new int[to - from];
@@ -64,7 +80,7 @@ class ParSort {
                     System.arraycopy(array, from, result, 0, result.length);
                     sort(result, 0, to - from);
                     return result;
-                }
+                }, pool
         );
     }
 }
